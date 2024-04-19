@@ -5,6 +5,7 @@ import datetime
 from discord_webhook import DiscordWebhook,DiscordEmbed
 import time
 import schedule
+from pytz import timezone
 
 webhookURL="{INSERT DISCORD FORUM CHANNEL WEBHOOK HERE}"
 
@@ -119,7 +120,7 @@ def main():
     webhook.add_embed(websiteEmbed)
     response = webhook.execute()
 
-schedule.every().day.at("06:10").do(main)
+schedule.every().day.at("06:10","US/Eastern").do(main)
 
 while True:
     schedule.run_pending()

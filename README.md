@@ -1,5 +1,5 @@
 # MorningSomewhereUtils
-
+A MorningSomewhere listener's side project. Not official. 
 ## MorningSomewhereWebhook.py
 I have now exceeded the character limit on Discord messages due to my spaghetti code. In any event, if you drop a Discord forum channel webhook link into this program, install Python3 and the requirements using the terminal command
 ```

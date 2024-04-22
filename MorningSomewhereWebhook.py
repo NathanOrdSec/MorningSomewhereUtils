@@ -120,7 +120,7 @@ def main():
     webhook.add_embed(websiteEmbed)
     response = webhook.execute()
 
-schedule.every().day.at("06:10","US/Eastern").do(main)
+schedule.every().day.at("06:10","US/Central").do(main)
 
 while True:
     schedule.run_pending()

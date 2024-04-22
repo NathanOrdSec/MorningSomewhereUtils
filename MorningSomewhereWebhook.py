@@ -21,12 +21,12 @@ def requestHandler(url):
     if url is None:
         return None
     response=requests.get(url)
-    time=0
+    timer=0
     while (response==400 or response is None):
         print("In Wait Loop")
-        time.sleep(120+time)
+        time.sleep(120+timer)
         response=requests.get(url)
-        time+=60
+        timer+=60
     return response
 
 def fetchHref(content):

@@ -6,6 +6,13 @@ from discord_webhook import DiscordWebhook,DiscordEmbed
 import time
 import schedule
 from pytz import timezone
+import logging
+import os
+from datetime import datetime
+
+logger = logging.getLogger(__name__)
+CURR_DIR = os.getcwd()
+logging.basicConfig(filename=CURR_DIR+'\MSWEB.log', encoding='utf-8', level=logging.DEBUG)
 
 webhookURL="{INSERT DISCORD FORUM CHANNEL WEBHOOK HERE}"
 
@@ -19,19 +26,19 @@ def descParse(raw):
 
 def requestHandler(url):
     if url is None:
-        return None
+        logger.warning('url object is none in requestHandler @ {}'.format(datetime.now()))
+        raise ValueError('url object is none in requestHandler')
     response=requests.get(url)
-    timer=0
+    loop=0
     while (response==400 or response is None):
-        print("In Wait Loop")
-        time.sleep(120+timer)
+        logger.info('In requestHandler waitloop {} @ {}'.format(loop,datetime.now()))
+        time.sleep(120)
         response=requests.get(url)
-        timer+=60
     return response
 
 def fetchHref(content):
     if content is None:
-        return None,None
+        raise ValueError('href is none in fetchHref')
     else:
         urlDesc=content.get_text()
         URL=content.get('href')
@@ -42,6 +49,7 @@ def soupParse(req,timeout):
         if timeout>6000:
             exit()
         time.sleep(timeout+60)
+        logger.info('In soupParse waitloop {} @ {}'.format(timeout%60,datetime.now()))
         soupParse(req,timeout+60)
         return
     else:
@@ -97,7 +105,6 @@ def main():
                 if len(linkTrunc)>=800:
                     break
             linkTrunc+="\n\nTruncated: See {}".format(link)
-            print(linkTrunc)
             linkEmbed.add_embed_field(name=key, value=linkTrunc,inline=False)
         else:
             linkEmbed.add_embed_field(name=key, value=("\n".join(linkdumpDict[key])),inline=False)
@@ -119,8 +126,9 @@ def main():
     webhook.add_embed(appleEmbed)
     webhook.add_embed(websiteEmbed)
     response = webhook.execute()
+    logger.info('Successfully Run @ {}'.format(datetime.now()))
 
-schedule.every().day.at("06:10","US/Central").do(main)
+schedule.every().day.at("09:26","US/Central").do(main)
 
 while True:
     schedule.run_pending()

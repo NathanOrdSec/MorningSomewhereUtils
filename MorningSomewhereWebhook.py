@@ -129,7 +129,7 @@ def main():
     response = webhook.execute()
     logger.info('Successfully Run @ {}'.format(strftime("%Y-%m-%d %H:%M:%S", localtime())))
 
-schedule.every().day.at("10:16","US/Central").do(main)
+schedule.every().day.at("6:10","US/Central").do(main)
 
 while True:
     schedule.run_pending()

@@ -8,30 +8,31 @@ import schedule
 from pytz import timezone
 import logging
 import os
-from datetime import datetime
+from time import localtime, strftime
 
 logger = logging.getLogger(__name__)
 CURR_DIR = os.getcwd()
-logging.basicConfig(filename=CURR_DIR+'\MSWEB.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename=CURR_DIR+'/MSWEB.log', encoding='utf-8', level=logging.DEBUG)
 
 webhookURL="{INSERT DISCORD FORUM CHANNEL WEBHOOK HERE}"
 
 def descParse(raw):
     link=raw.find("a").get('href')
     linkName=raw.find("a").get_text()
-    parsed=""""""
+    parsed="""
+"""
     parsed="\n\n".join(raw.strings)
     parsed=parsed.replace(linkName,"[{label}]({link})".format(label=linkName,link=link))
     return parsed
 
 def requestHandler(url):
     if url is None:
-        logger.warning('url object is none in requestHandler @ {}'.format(datetime.now()))
+        logger.warning('url object is none in requestHandler @ {}'.format(strftime("%Y-%m-%d %H:%M:%S", localtime())))
         raise ValueError('url object is none in requestHandler')
     response=requests.get(url)
     loop=0
     while (response==400 or response is None):
-        logger.info('In requestHandler waitloop {} @ {}'.format(loop,datetime.now()))
+        logger.info('In requestHandler waitloop {} @ {}'.format(loop,strftime("%Y-%m-%d %H:%M:%S", localtime())))
         time.sleep(120)
         response=requests.get(url)
     return response
@@ -49,7 +50,7 @@ def soupParse(req,timeout):
         if timeout>6000:
             exit()
         time.sleep(timeout+60)
-        logger.info('In soupParse waitloop {} @ {}'.format(timeout%60,datetime.now()))
+        logger.info('In soupParse waitloop {} @ {}'.format(timeout%60,strftime("%Y-%m-%d %H:%M:%S", localtime())))
         soupParse(req,timeout+60)
         return
     else:
@@ -126,9 +127,9 @@ def main():
     webhook.add_embed(appleEmbed)
     webhook.add_embed(websiteEmbed)
     response = webhook.execute()
-    logger.info('Successfully Run @ {}'.format(datetime.now()))
+    logger.info('Successfully Run @ {}'.format(strftime("%Y-%m-%d %H:%M:%S", localtime())))
 
-schedule.every().day.at("06:10","US/Central").do(main)
+schedule.every().day.at("10:16","US/Central").do(main)
 
 while True:
     schedule.run_pending()

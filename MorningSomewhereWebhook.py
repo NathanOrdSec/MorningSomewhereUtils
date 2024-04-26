@@ -117,7 +117,7 @@ def main():
     websiteEmbed = DiscordEmbed(title="Morning Somewhere Website", description="", url=episodeLink, color="2A5539")
 
     heroEmbed = DiscordEmbed(title="", description="", color="EEA63F")
-    heroEmbed.set_image(url=image)
+    heroEmbed.set_image(url=("?".join(image.split("?")[:-1]))+"?fit=1024%2C576&ssl=1")
 
     webhook.add_embed(titleEmbed)
     webhook.add_embed(heroEmbed)

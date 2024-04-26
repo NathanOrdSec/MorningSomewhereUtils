@@ -22,7 +22,7 @@ def descParse(raw):
     parsed="""
 """
     parsed="\n\n".join(raw.strings)
-    parsed=parsed.replace(linkName,"[{label}]({link})".format(label=linkName,link=link))
+    parsed=parsed.replace(linkName,"{link}".format(link=link))
     return parsed
 
 def requestHandler(url):
@@ -115,7 +115,6 @@ def main():
     appleEmbed = DiscordEmbed(title="Morning Somewhere - Apple Podcasts", description="", url="https://podcasts.apple.com/us/podcast/morning-somewhere/id1728257931", color="4E7E42")
 
     websiteEmbed = DiscordEmbed(title="Morning Somewhere Website", description="", url=episodeLink, color="2A5539")
-
     heroEmbed = DiscordEmbed(title="", description="", color="EEA63F")
     heroEmbed.set_image(url=("?".join(image.split("?")[:-1]))+"?fit=1024%2C576&ssl=1")
 

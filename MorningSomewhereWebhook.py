@@ -31,7 +31,7 @@ def requestHandler(url):
         raise ValueError('url object is none in requestHandler')
     response=requests.get(url)
     loop=0
-    while (response>=400 or response is None):
+    while (response.status_code>=400 or response is None):
         logger.info('In requestHandler waitloop {} @ {}'.format(loop,strftime("%Y-%m-%d %H:%M:%S", localtime())))
         time.sleep(120)
         response=requests.get(url)

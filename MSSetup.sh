@@ -13,7 +13,7 @@ pip3 install requests BeautifulSoup datetime discord_webhook time schedule pytz 
 curl -o MSPod.py https://raw.githubusercontent.com/NathanOrdSec/MorningSomewhereUtils/main/MorningSomewhereWebhook>
 
 read -p "Enter your Discord Forum Webhook URL: " URL
-echo $URL
+
 #Replace Placeholder with Discord Webhook URL
 sed -i "s/{INSERT DISCORD FORUM CHANNEL WEBHOOK HERE}/$URL/g" /opt/MSPod2/MSPod.py
 

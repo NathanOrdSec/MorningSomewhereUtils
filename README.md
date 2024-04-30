@@ -6,8 +6,8 @@ A MorningSomewhere listener's side project. Not official.
 ```
 $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/NathanOrdSec/MorningSomewhereUtils/main/MSSetup.sh)"
 ```
-```
 ### install via script/wget
+```
 $ bash -c "$(wget https://raw.githubusercontent.com/NathanOrdSec/MorningSomewhereUtils/main/MSSetup.sh -O -)"
 ```
 I have now exceeded the character limit on Discord messages due to my spaghetti code. In any event, if you drop a Discord forum channel webhook link into this program, install Python3 and the requirements using the terminal command

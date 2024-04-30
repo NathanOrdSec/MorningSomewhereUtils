@@ -48,9 +48,10 @@ def fetchHref(content):
 def soupParse(req,timeout):
     if req is None:
         if timeout>6000:
+            logger.info('soupParse timeout {} @ {}'.format(timeout%60,strftime("%Y-%m-%d %H:%M:%S", localtime())))
             exit()
         time.sleep(timeout+60)
-        logger.info('In soupParse waitloop {} @ {}'.format(timeout%60,strftime("%Y-%m-%d %H:%M:%S", localtime())))
+        logger.info('In soupParse timeout {} @ {}'.format(timeout%60,strftime("%Y-%m-%d %H:%M:%S", localtime())))
         soupParse(req,timeout+60)
         return
     else:
@@ -60,7 +61,7 @@ def soupParse(req,timeout):
 def main():
     #Fetch Date Category
     date = datetime.datetime.now()
-    r = requestHandler('https://morningsomewhere.com/{year}/{month}/{day}'.format(year=date.strftime("%Y"),month=date.strftime("%m"),day=date.strftime("%d")))
+    r = requestHandler('https://morningsomewhere.com/{year}/{month}/{day}/'.format(year=date.strftime("%Y"),month=date.strftime("%m"),day=date.strftime("%d")))
     soup = soupParse(r,0)
 
     #Fetch Today's Podcast
@@ -128,11 +129,11 @@ def main():
     response = webhook.execute()
     logger.info('Successfully Run @ {}'.format(strftime("%Y-%m-%d %H:%M:%S", localtime())))
 
-schedule.every().Monday.at("6:10","US/Central").do(main)
-schedule.every().Tuesnday.at("6:10","US/Central").do(main)
-schedule.every().Wednesday.at("6:10","US/Central").do(main)
-schedule.every().Thursday.at("6:10","US/Central").do(main)
-schedule.every().Friday.at("6:10","US/Central").do(main)
+schedule.every().monday.at("06:10","US/Central").do(main)
+schedule.every().tuesday.at("06:10","US/Central").do(main)
+schedule.every().wednesday.at("06:10","US/Central").do(main)
+schedule.every().thursday.at("06:10","US/Central").do(main)
+schedule.every().friday.at("06:10","US/Central").do(main)
 
 while True:
     schedule.run_pending()

@@ -28,13 +28,15 @@ def descParse(raw):
 def requestHandler(url):
     if url is None:
         logger.warning('url object is none in requestHandler @ {}'.format(strftime("%Y-%m-%d %H:%M:%S", localtime())))
-        raise ValueError('url object is none in requestHandler')
+        main()
+        return
     response=requests.get(url)
     loop=0
-    while (response.status_code>=400 or response is None):
+    while (response.status_code>=400 or response.content is None):
         logger.info('In requestHandler waitloop {} @ {}'.format(loop,strftime("%Y-%m-%d %H:%M:%S", localtime())))
         time.sleep(120)
         response=requests.get(url)
+        loop+=1
     return response
 
 def fetchHref(content):

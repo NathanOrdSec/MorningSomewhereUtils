@@ -105,10 +105,11 @@ def main():
         if len("\n".join(linkdumpDict[key]))>1024:
             linkTrunc=""""""
             for singleLink in linkdumpDict[key]:
-                linkTrunc+="\n"+singleLink
-                if len(linkTrunc)>=800:
-                    break
-            linkTrunc+="\n\nTruncated: See {}".format(link)
+                if len(linkTrunc+"\n"+singleLink)>1024:
+                     break
+                else:
+                    linkTrunc+="\n"+singleLink
+            linkTrunc+="\n\nTruncated: See {}".format(episodeLink)
             linkEmbed.add_embed_field(name=key, value=linkTrunc,inline=False)
         else:
             linkEmbed.add_embed_field(name=key, value=("\n".join(linkdumpDict[key])),inline=False)

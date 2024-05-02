@@ -18,7 +18,7 @@ read -p "Enter your Discord Forum Webhook URL: " URL
 sed -i "s/{INSERT DISCORD FORUM CHANNEL WEBHOOK HERE}/$URL/g" /opt/MSPod2/MSPod.py
 
 #Create system service and run it!
-curl -o /etc/systemd/system/MSPodWebhook.service https://raw.githubusercontent.com/NathanOrdSec/MorningSomewhereUt>
+curl -o /etc/systemd/system/MSPodWebhook.service https://raw.githubusercontent.com/NathanOrdSec/MorningSomewhereUtils/main/mspod.service
 
 systemctl enable MSPodWebhook.service
 systemctl daemon-reload

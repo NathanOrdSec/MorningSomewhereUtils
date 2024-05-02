@@ -10,7 +10,7 @@ apt install python3 python3-pip
 pip3 install requests BeautifulSoup datetime discord_webhook time schedule pytz logging os
 
 #Get Files
-curl -o MSPod.py https://raw.githubusercontent.com/NathanOrdSec/MorningSomewhereUtils/main/MorningSomewhereWebhook
+curl -o MSPod.py https://raw.githubusercontent.com/NathanOrdSec/MorningSomewhereUtils/main/MorningSomewhereWebhook.py
 
 read -p "Enter your Discord Forum Webhook URL: " URL
 

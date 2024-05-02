@@ -15,7 +15,7 @@ curl -o MSPod.py https://raw.githubusercontent.com/NathanOrdSec/MorningSomewhere
 read -p "Enter your Discord Forum Webhook URL: " URL
 
 #Replace Placeholder with Discord Webhook URL
-sed -i "s/{INSERT DISCORD FORUM CHANNEL WEBHOOK HERE}/$URL/g" /opt/MSPod/MSPod.py
+sed -i "s@{INSERT DISCORD FORUM CHANNEL WEBHOOK HERE}@$URL@g" /opt/MSPod/MSPod.py
 
 #Create system service and run it!
 curl -o /etc/systemd/system/MSPodWebhook.service https://raw.githubusercontent.com/NathanOrdSec/MorningSomewhereUtils/main/mspod.service

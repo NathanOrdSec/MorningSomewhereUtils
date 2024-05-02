@@ -105,7 +105,7 @@ def main():
         if len("\n".join(linkdumpDict[key]))>1024:
             linkTrunc=""""""
             for singleLink in linkdumpDict[key]:
-                if len(linkTrunc+"\n"+singleLink)>1024:
+                if len(linkTrunc+"\n"+singleLink)>900:
                     linkTrunc+="\n\nTruncated: See {}".format(episodeLink)
                     break
                 else:
